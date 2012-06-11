@@ -1,21 +1,33 @@
 var express = require('express'),
-    app = express.createServer();
+    app = express.createServer(),
+        request= require('request');
 
 
 
 app.use(express.static(__dirname + '/'));
-
+app.use(express.bodyParser());
 
 app.listen(8080);
-
-/*
-app.get('/', function(req, res)
+app.all('/proxy', function(req,res)
 {
-    directToPage(res,'/index.html');
+    var urlParts= req.url.split('?');
+    var linkParts=urlParts[1].split('=');
+    console.log(linkParts[1]);
+   request(linkParts[1],function(error,response,body)
+   {
+       res.send(body);
+   });
+    //res.write(response);
 });
 
+/*app.get('/proxy', function(req, res)
+{
+    console.log(req);
+    res.send('correct');
+});*/
 
 
+/*
 app.get(/\.(js|css|htm|html)$/,function(req,res)
 {
     console.log(req.url);
