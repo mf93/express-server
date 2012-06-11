@@ -1,19 +1,27 @@
 var express = require('express'),
-    app = express.createServer(),
-    fs= require('fs');
+    app = express.createServer();
 
+
+
+app.use(express.static(__dirname + '/'));
+
+
+app.listen(8080);
+
+/*
 app.get('/', function(req, res)
 {
     directToPage(res,'/index.html');
 });
+
+
+
 app.get(/\.(js|css|htm|html)$/,function(req,res)
 {
     console.log(req.url);
     directToPage(res,req.url);
     console.log("ok");
 });
-
-app.listen(8080);
 
 function directToPage(resource,rurl)
 {
@@ -33,3 +41,4 @@ function directToPage(resource,rurl)
         }
     });
 }
+    */
